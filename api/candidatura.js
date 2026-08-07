@@ -1,6 +1,7 @@
 const TO_EMAIL = process.env.TO_EMAIL || 'devacessoclub@gmail.com';
 const FROM_EMAIL =
-  process.env.FROM_EMAIL || 'Licenciamento Acesso Club <noreply@acessoclub.com>';
+  process.env.FROM_EMAIL ||
+  'Licenciamento Acesso Club <naoresponda@meuacessoclub.com.br>';
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -102,7 +103,11 @@ module.exports = async function handler(req, res) {
     const data = await response.json().catch(() => ({}));
 
     if (!response.ok) {
-      console.error('Resend error', response.status, data);
+      console.error(
+        'Resend error',
+        response.status,
+        data?.message ?? data?.name ?? data,
+      );
       return res.status(502).json({ error: 'Failed to send email' });
     }
 
