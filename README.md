@@ -15,6 +15,20 @@ python3 -m http.server 8080
 
 Abra [http://localhost:8080](http://localhost:8080).
 
+## Formulário (e-mail)
+
+O envio da candidatura usa `POST /api/candidatura` (função serverless na Vercel + [Resend](https://resend.com)).
+
+Variáveis de ambiente:
+
+| Variável | Descrição |
+|----------|-----------|
+| `RESEND_API_KEY` | Token da API Resend |
+| `TO_EMAIL` | Destino (padrão: `devacessoclub@gmail.com`) |
+| `FROM_EMAIL` | Remetente verificado no Resend |
+
+Copie `.env.example` para `.env` apenas em desenvolvimento local com `vercel dev`.
+
 ## Deploy
 
-Publique a raiz do repositório; o arquivo de entrada é `index.html`.
+Projeto Vercel: `licenciamento-acesso-club`. Publique a raiz do repositório; entrada estática `index.html` + pasta `api/`.
